@@ -19,8 +19,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "bTokman\\react\\widget\\": "widget",
-      "bTokman\\react\\assets\\": "assets"
+      "bTokman\\react\\": "lib/"
+
     }
   },
   "minimum-stability": "dev"

@@ -7,7 +7,7 @@ class ReactUiAsset extends AssetBundle
 {
     public $js = [
         YII_ENV_DEV ?
-        '../build/reactUi.js' :  '../build/reactUi.min.js'
+        '../../build/reactUi.js' :  '../../build/reactUi.min.js'
     ];
 
     public $depends = [
