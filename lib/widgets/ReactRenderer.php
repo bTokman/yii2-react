@@ -7,8 +7,8 @@ namespace bTokman\react\widgets;
 use ReactJS;
 use yii\base\Widget;
 use yii\web\NotFoundHttpException;
-use bTokman\react\assets\ReactAsset;
-use bTokman\react\assets\ReactUiAsset;
+use bTokman\react\ReactAsset;
+use bTokman\react\ReactUiAsset;
 
 
 /**

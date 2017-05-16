@@ -1,5 +1,5 @@
 <?php
-namespace bTokman\react\assets;
+namespace bTokman\react;
 
 use yii\web\AssetBundle;
 
@@ -8,7 +8,7 @@ class ReactAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@bTokman/react/web/build';
+    public $sourcePath = __DIR__ . '/assets';
 
 
     public $js = [
