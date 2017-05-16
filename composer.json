@@ -1,5 +1,6 @@
 {
   "name": "b-tokman/yii2-react",
+  "version": "1.0.0",
   "description": "Yii 2 widget for server-side rendering ReactJs",
   "license": "MIT",
   "keywords": [
@@ -8,7 +9,7 @@
     "yii 2"
   ],
   "require": {
-    "yiisoft/yii2": "~2.0.0",
+    "yiisoft/yii2": "~2",
     "reactjs/react-php-v8js": "dev-master"
   },
   "authors": [
