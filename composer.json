@@ -1,6 +1,5 @@
 {
   "name": "b-tokman/yii2-react",
-  "version": "1.0.0",
   "description": "Yii 2 widget for server-side rendering ReactJs",
   "license": "MIT",
   "keywords": [
@@ -23,6 +22,5 @@
       "bTokman\\yii2react\\widget\\": "widget/",
       "bTokman\\yii2react\\assets\\": "assets/"
     }
-  },
-  "minimum-stability": "dev"
+  }
 }
