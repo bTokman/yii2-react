@@ -8,7 +8,7 @@ class ReactAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@bTokman/web/build';
+    public $sourcePath = '@bTokman/react/web/build';
 
 
     public $js = [

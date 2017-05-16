@@ -8,7 +8,7 @@ class ReactUiAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@bTokman/web/build';
+    public $sourcePath = '@bTokman/react/web/build';
 
     public $js = [
         YII_ENV_DEV ?
