@@ -5,9 +5,14 @@ use yii\web\AssetBundle;
 
 class ReactUiAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
+    public $sourcePath = '@bTokman/web/build';
+
     public $js = [
         YII_ENV_DEV ?
-        '../../build/reactUi.js' :  '../../build/reactUi.min.js'
+        'reactUi.js' :  'reactUi.min.js'
     ];
 
     public $depends = [

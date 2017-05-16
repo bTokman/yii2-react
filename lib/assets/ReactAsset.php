@@ -5,9 +5,15 @@ use yii\web\AssetBundle;
 
 class ReactAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
+    public $sourcePath = '@bTokman/web/build';
+
+
     public $js = [
         YII_ENV_DEV ?
-            '../../build/react-bundle.js' : '../../build/react-bundle.min.js',
+            'react-bundle.js' : '.react-bundle.min.js',
     ];
 }
 

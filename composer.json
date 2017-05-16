@@ -19,8 +19,8 @@
   ],
   "autoload": {
     "psr-4": {
+      "bTokman\\": "",
       "bTokman\\react\\": "lib/"
-
     }
   },
   "minimum-stability": "dev"
