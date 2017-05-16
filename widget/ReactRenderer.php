@@ -1,7 +1,7 @@
 <?php
 
 
-namespace bTokman\yii2react\widgets;
+namespace bTokman\react\widgets;
 
 
 use ReactJS;

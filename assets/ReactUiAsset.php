@@ -1,5 +1,5 @@
 <?php
-namespace bTokman\yii2react\assets;
+namespace bTokman\react\assets;
 
 use yii\web\AssetBundle;
 

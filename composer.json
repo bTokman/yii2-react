@@ -19,8 +19,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "bTokman\\yii2react\\widget\\": "widget",
-      "bTokman\\yii2react\\assets\\": "assets"
+      "bTokman\\react\\widget\\": "widget",
+      "bTokman\\react\\assets\\": "assets"
     }
   },
   "minimum-stability": "dev"
