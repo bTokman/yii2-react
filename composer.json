@@ -9,7 +9,7 @@
   ],
   "require": {
     "yiisoft/yii2": "~2.0.0",
-    "reactjs/react-php-v8js": "dev-master",
+    "reactjs/react-php-v8js": "dev-master"
   },
   "authors": [
     {
