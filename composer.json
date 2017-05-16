@@ -22,5 +22,6 @@
       "bTokman\\yii2react\\widget\\": "widget/",
       "bTokman\\yii2react\\assets\\": "assets/"
     }
-  }
+  },
+  "minimum-stability": "dev"
 }
