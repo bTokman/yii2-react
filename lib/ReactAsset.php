@@ -13,7 +13,7 @@ class ReactAsset extends AssetBundle
 
     public $js = [
         YII_ENV_DEV ?
-            'react-bundle.js' : '.react-bundle.min.js',
+            'react-bundle.js' : 'react-bundle.min.js',
     ];
 }
 

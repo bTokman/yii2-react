@@ -5,6 +5,7 @@ namespace bTokman\react\widgets;
 
 
 use ReactJS;
+use Yii;
 use yii\base\Widget;
 use yii\web\NotFoundHttpException;
 use bTokman\react\ReactAsset;
@@ -98,7 +99,9 @@ class ReactRenderer extends Widget
     private function getReactSource()
     {
         if ($this->reactSourceJs === null) {
-            $this->reactSourceJs = file_get_contents((new ReactAsset())->js[0]);
+            $bundle = new ReactAsset();
+            $alias = Yii::getAlias($bundle->sourcePath) . DIRECTORY_SEPARATOR;
+            $this->reactSourceJs = file_get_contents($alias . $bundle->js[0]);
         }
         return $this->reactSourceJs;
     }
@@ -109,7 +112,7 @@ class ReactRenderer extends Widget
     public function applyJs()
     {
         ReactAsset::register($this->view);
-        $this->getView()->registerJsFile($this->componentsSourceJs);
+        $this->getView()->registerJsFile($this->componentsSourceJs, ['depends' => 'bTokman\react\ReactAsset']);
         ReactUiAsset::register($this->view);
 
     }

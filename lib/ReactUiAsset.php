@@ -16,6 +16,6 @@ class ReactUiAsset extends AssetBundle
     ];
 
     public $depends = [
-        'app\assets\ReactAsset'
+        'bTokman\react\ReactAsset'
     ];
 }
