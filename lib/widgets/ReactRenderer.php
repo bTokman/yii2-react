@@ -68,11 +68,11 @@ class ReactRenderer extends Widget
 
         /**
          *  Default options, "tag" - place to render react app - default to "div"
-         *  "preload" - tell to widget render your react app on server side - default to true
+         *  "prerender" - tell to widget render your react app on server side - default to true
          */
         $this->defaultOptions = [
             'tag' => 'div',
-            'preload' => true
+            'prerender' => true
         ];
 
         /**
