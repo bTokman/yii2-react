@@ -129,7 +129,7 @@ class ReactRenderer extends Widget
 
         // Creates the markup of the component
         if ($options['prerender'] === true) {
-            $markup = $this->getReact()->setComponent($this->componentsSourceJs, $this->props)->getMarkup();
+            $markup = $this->react->setComponent($this->componentsSourceJs, $this->props)->getMarkup();
         }
 
         // Pass props back to view as value of `data-react-props`
