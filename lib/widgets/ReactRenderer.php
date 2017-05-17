@@ -42,7 +42,7 @@ class ReactRenderer extends Widget
          * Options for html attributes
          * @var array
          */
-        $options;
+        $options = [];
 
 
     private $react = null;
