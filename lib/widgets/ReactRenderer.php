@@ -73,6 +73,12 @@ class ReactRenderer extends Widget
             'tag' => 'div',
             'preload' => true
         ];
+
+        /**
+         * Get ReactJs server side render instance
+         */
+        $this->react = new ReactJS($this->getReactSource(), $this->getSourceJs());
+
         parent::init();
     }
 
@@ -83,19 +89,6 @@ class ReactRenderer extends Widget
     {
         $this->applyJs();
         return $this->renderReact();
-    }
-
-
-    /**
-     * Get ReactJs server side render instance
-     * @return ReactJS
-     */
-    private function getReact()
-    {
-        if ($this->react === null) {
-            $this->react = new ReactJS($this->getReactSource(), $this->getSourceJs());
-        }
-        return $this->react;
     }
 
     /**
@@ -116,7 +109,7 @@ class ReactRenderer extends Widget
     public function applyJs()
     {
         ReactAsset::register($this->view);
-        $this->getView()->registerJsFile($this->componentsSourceJs, ['depends' => 'app\assets\ReactAsset']);
+        $this->getView()->registerJsFile($this->componentsSourceJs);
         ReactUiAsset::register($this->view);
 
     }
