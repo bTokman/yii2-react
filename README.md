@@ -18,7 +18,7 @@ Then run
 ```
 
 # Usage
-After the installation you'll be able to use the `bTokman\react\widgets\ReactRenderer` widget in your app.
+After the installation you'll be able to use the `ReactRenderer` widget in your app.
 ```php
 ReactRenderer::widget([
     'componentsSourceJs' => <pathToYourComponentJsFile>',
@@ -28,7 +28,7 @@ ReactRenderer::widget([
     
 // example
 
-ReactRenderer::widget([
+bTokman\react\widgets\ReactRenderer::widget([
     'componentsSourceJs' => 'js/layout.js',
     'component' => 'Layout',
     'props' => [ 'title' => 'Hello' ],
@@ -40,7 +40,7 @@ ReactRenderer::widget([
 
 // you also can use namespased components
 
-ReactRenderer::widget([
+bTokman\react\widgets\ReactRenderer::widget([
     'componentsSourceJs' => 'js/layout.js',
     'component' => 'Layout.Header',
     'props' => [ 'title' => 'Hello' ],
@@ -51,7 +51,7 @@ ReactRenderer::widget([
 ]); 
 ```
   - `componentsSourceJs` - path to your react components js file
-  - `component` - the name of global warioable the contain your React component, you also can use [namespased components](https://facebook.github.io/react/docs/jsx-in-depth.html#namespaced-components) by dot-notation
+  - `component` - the name of global variable the contain your React component, you also can use [namespased components](https://facebook.github.io/react/docs/jsx-in-depth.html#namespaced-components) by dot-notation
   - `props` - [props](https://facebook.github.io/react/docs/components-and-props.html) array that'll be passed to your component
 * `options` - Array of options that you can pass to widget:
   * `prerender` -  Tells widget to render your component server-side, by default - `true`
