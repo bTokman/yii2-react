@@ -3,6 +3,10 @@ namespace bTokman\react;
 
 use yii\web\AssetBundle;
 
+/**
+ * Class ReactUiAsset
+ * @package bTokman\react
+ */
 class ReactUiAsset extends AssetBundle
 {
     /**

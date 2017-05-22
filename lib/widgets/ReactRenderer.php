@@ -16,7 +16,7 @@ use bTokman\react\ReactUiAsset;
  * Class ReactRenderer - yii2 widget to server-side react rendering
  * and implementing it on client side.
  * This widget require V8JS PHP extension: http://php.net/v8js
- * @package app\widgets
+ * @package bTokman\react\widgets
  */
 class ReactRenderer extends Widget
 {
@@ -54,11 +54,11 @@ class ReactRenderer extends Widget
      * @var string
      */
     private $reactSourceJs;
+
     private $defaultOptions;
 
     /**
      * Initializes the widget.
-     * This renders the form open tag.
      */
     public function init()
     {
