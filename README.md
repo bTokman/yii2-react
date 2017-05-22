@@ -9,6 +9,13 @@ How to setup V8Js PHP extension? Use the links below:
   - [On Linux](https://github.com/phpv8/v8js/blob/master/README.Linux.md)
   - [On MacOs](https://github.com/phpv8/v8js/blob/master/README.MacOS.md)
   - [On Windows](https://github.com/phpv8/v8js/blob/master/README.Win32.md)
+### Composer
+Set the `minimum-stability` in your composer.json to `dev`
+Then run 
+
+```sh
+  $ composer require b-tokman/yii2-react
+```
 
 # Usage
 After the installation you'll be able to use the `bTokman\react\widgets\ReactRenderer` widget in your app.
@@ -48,7 +55,7 @@ ReactRenderer::widget([
   - `props` - [props](https://facebook.github.io/react/docs/components-and-props.html) array that'll be passed to your component
 * `options` - Array of options that you can pass to widget:
   * `prerender` -  Tells widget to render your component server-side, by default - `true`
-  * `tag` - The tag of the element where your component would be passed, by default - `div`
+  * `tag` - The tag of the element where your component would be passed
   * _html attributes_ -  HTML attribute that will be added to the wrapper element of your component. Example: `'id' => 'root'`.
  
 ### To right working - your reactJs components must be in window scope.

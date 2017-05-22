@@ -2,12 +2,18 @@
   "name": "b-tokman/yii2-react",
   "description": "Yii 2 widget for server-side rendering ReactJs",
   "license": "MIT",
+  "type": "yii2-extension",
   "keywords": [
     "react",
     "reactjs",
-    "yii 2"
+    "yii2"
   ],
+  "support": {
+    "issues": "https://github.com/bTokman/yii2-react/issues",
+    "source": "https://github.com/bTokman/yii2-react"
+  },
   "require": {
+    "php": ">=5.4.0",
     "yiisoft/yii2": "~2",
     "reactjs/react-php-v8js": "^2.0"
   },
