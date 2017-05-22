@@ -30,7 +30,9 @@ ReactRenderer::widget([
         'prerender' => true 
     ]
 ]); 
+
 // you also can use namespased components
+
 ReactRenderer::widget([
     'componentsSourceJs' => 'js/layout.js',
     'component' => 'Layout.Header',
