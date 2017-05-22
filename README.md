@@ -6,9 +6,9 @@ This is Yii2 widget that able to use [ReactJS](https://facebook.github.io/react/
 # Installation
 This widget require [v8js](https://pecl.php.net/package/v8js) php extesion.
 How to setup V8Js PHP extension? Use the links below:
-  - ##### [On Linux](https://github.com/phpv8/v8js/blob/master/README.Linux.md)
-  - ##### [On MacOs](https://github.com/phpv8/v8js/blob/master/README.MacOS.md)
-  - ##### [On Windows](https://github.com/phpv8/v8js/blob/master/README.Win32.md)
+  - [On Linux](https://github.com/phpv8/v8js/blob/master/README.Linux.md)
+  - [On MacOs](https://github.com/phpv8/v8js/blob/master/README.MacOS.md)
+  - [On Windows](https://github.com/phpv8/v8js/blob/master/README.Win32.md)
 
 # Usage
 After the installation you'll be able to use the `bTokman\react\widgets\ReactRenderer` widget in your app.
