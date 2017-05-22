@@ -56,6 +56,6 @@ bTokman\react\widgets\ReactRenderer::widget([
   * `tag` - The tag of the element where your component would be passed, by default - `div`
   * _html attributes_ -  HTML attribute that will be added to the wrapper element of your component. Example: `'id' => 'root'`.
  
-### To right working - your reactJs components must be in window scope.
+### To right working - your reactJs components must be in `window` scope.
 
   
