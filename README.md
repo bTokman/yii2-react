@@ -21,7 +21,7 @@ Then run
 After the installation you'll be able to use the `bTokman\react\widgets\ReactRenderer` widget in your app.
 ```php
 ReactRenderer::widget([
-    'componentsSourceJs' => <pathToYourComponentJsFile>',
+    'componentsSourceJs' => <pathToYourComponentJsFile>,
     'component' => <componentName>,
     'props' => [props],
     'options' => [options]
