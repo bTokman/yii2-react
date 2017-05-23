@@ -33,7 +33,6 @@ ReactRenderer::widget([
     'component' => 'Layout',
     'props' => [ 'title' => 'Hello' ],
     'options' => [
-        'id' => 'root',
         'prerender' => true 
     ]
 ]); 
@@ -45,7 +44,6 @@ ReactRenderer::widget([
     'component' => 'Layout.Header',
     'props' => [ 'title' => 'Hello' ],
     'options' => [
-        'id' => 'root',
         'prerender' => true 
     ]
 ]); 
