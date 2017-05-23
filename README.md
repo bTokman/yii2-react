@@ -18,32 +18,34 @@ Then run
 ```
 
 # Usage
-After the installation you'll be able to use the `ReactRenderer` widget in your app.
+After the installation you'll be able to use the `bTokman\react\widgets\ReactRenderer` widget in your app.
 ```php
-bTokman\react\widgets\ReactRenderer::widget([
-    'componentsSourceJs' => <pathToYourComponentJsFile>,
+ReactRenderer::widget([
+    'componentsSourceJs' => <pathToYourComponentJsFile>',
     'component' => <componentName>,
     'props' => [props],
     'options' => [options]
     
 // example
 
-bTokman\react\widgets\ReactRenderer::widget([
+ReactRenderer::widget([
     'componentsSourceJs' => 'js/layout.js',
     'component' => 'Layout',
     'props' => [ 'title' => 'Hello' ],
     'options' => [
+        'id' => 'root',
         'prerender' => true 
     ]
 ]); 
 
 // you also can use namespased components
 
-bTokman\react\widgets\ReactRenderer::widget([
+ReactRenderer::widget([
     'componentsSourceJs' => 'js/layout.js',
     'component' => 'Layout.Header',
     'props' => [ 'title' => 'Hello' ],
     'options' => [
+        'id' => 'root',
         'prerender' => true 
     ]
 ]); 
@@ -53,9 +55,50 @@ bTokman\react\widgets\ReactRenderer::widget([
   - `props` - [props](https://facebook.github.io/react/docs/components-and-props.html) array that'll be passed to your component
 * `options` - Array of options that you can pass to widget:
   * `prerender` -  Tells widget to render your component server-side, by default - `true`
-  * `tag` - The tag of the element where your component would be passed, by default - `div`
+  * `tag` - The tag of the element where your component would be passed
   * _html attributes_ -  HTML attribute that will be added to the wrapper element of your component. Example: `'id' => 'root'`.
  
 ### To right working - your reactJs components must be in `window` scope.
+Example `layout.js`
+```js
+class Header extends React.Component {
+    render() {
+        let title = this.props.title;
+        return React.createElement(
+            "header",
+            null,
+            React.createElement("div", null, title)
+        );
+    }
+}
 
+class Main extends React.Component {
+    render() {
+        let title = this.props.title;
+        return React.createElement(
+            "main",
+            null,
+            React.createElement("div", null, title)
+        );
+    }
+}
+
+class Layout extends React.Component {
+    render() {
+        return React.createElement(
+            "div",
+            null,
+            React.createElement(Layout.Header, {title: this.props.title}),
+            React.createElement(Layout.Main, {title: this.props.title})
+        );
+    }
+}
+
+Layout.Header = Header;
+Layout.Main = Main;
+
+window.Layout = Layout;
+window.Header = Header;
+
+```
   
