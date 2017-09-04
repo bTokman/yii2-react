@@ -7,5 +7,5 @@ php:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install libv8-dev g++
+  - sudo apt-get install libv8-dev
   - pecl install v8js-0.1.3
