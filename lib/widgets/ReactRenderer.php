@@ -45,7 +45,12 @@ class ReactRenderer extends Widget
         $options = [];
 
 
-    private $react = null;
+    /**
+     * Instance of ReactJS object
+     * More information https://github.com/reactjs/react-php-v8js
+     * @var $_react ReactJS
+     */
+    private $_react;
     /**
      * Path to React bundle, must contain:
      * React Js : https://www.npmjs.com/package/react
@@ -53,9 +58,18 @@ class ReactRenderer extends Widget
      * React-dom-server from React-dom package
      * @var string
      */
-    private $reactSourceJs;
+    private $_reactSourceJs;
 
-    private $defaultOptions;
+    /**
+     *  Default options, "tag" - place to render react app - default to "div"
+     *  "prerender" - tell to widget render your react app on server side - default to true
+     * @var $_defaultOptions array
+     */
+    private $_defaultOptions = [
+        'tag' => 'div',
+        'prerender' => true
+    ];
+
 
     /**
      * Initializes the widget.
@@ -65,20 +79,10 @@ class ReactRenderer extends Widget
         if (empty($this->componentsSourceJs) || !file_exists($this->componentsSourceJs)) {
             throw new NotFoundHttpException('React component source js file doesn\'t exist');
         }
-
-        /**
-         *  Default options, "tag" - place to render react app - default to "div"
-         *  "prerender" - tell to widget render your react app on server side - default to true
-         */
-        $this->defaultOptions = [
-            'tag' => 'div',
-            'prerender' => true
-        ];
-
         /**
          * Get ReactJs server side render instance
          */
-        $this->react = new ReactJS($this->getReactSource(), $this->getSourceJs());
+        $this->_react = new ReactJS($this->getReactSource(), $this->getSourceJs());
 
         parent::init();
     }
@@ -98,12 +102,12 @@ class ReactRenderer extends Widget
      */
     private function getReactSource()
     {
-        if ($this->reactSourceJs === null) {
+        if ($this->_reactSourceJs === null) {
             $bundle = new ReactAsset();
             $alias = Yii::getAlias($bundle->sourcePath) . DIRECTORY_SEPARATOR;
-            $this->reactSourceJs = file_get_contents($alias . $bundle->js[0]);
+            $this->_reactSourceJs = file_get_contents($alias . $bundle->js[0]);
         }
-        return $this->reactSourceJs;
+        return $this->_reactSourceJs;
     }
 
     /**
@@ -123,20 +127,20 @@ class ReactRenderer extends Widget
      */
     public function renderReact()
     {
-        $options = array_merge($this->defaultOptions, $this->options);
+        $options = array_merge($this->_defaultOptions, $this->options);
         $tag = $options['tag'];
         $markup = '';
 
         // Creates the markup of the component
         if ($options['prerender'] === true) {
-            $markup = $this->react->setComponent($this->component, $this->props)->getMarkup();
+            $markup = $this->_react->setComponent($this->component, $this->props)->getMarkup();
         }
 
         // Pass props back to view as value of `data-react-props`
         $props = htmlentities(json_encode($this->props), ENT_QUOTES);
 
         // Gets all values that aren't used as options and map it as HTML attributes
-        $htmlAttributes = array_diff_key($options, $this->defaultOptions);
+        $htmlAttributes = array_diff_key($options, $this->_defaultOptions);
         $htmlAttributesString = $this->arrayToHTMLAttributes($htmlAttributes);
 
         return "<{$tag} data-react-class='{$this->component}' data-react-props='{$props}' {$htmlAttributesString}>{$markup}</{$tag}>";
@@ -151,7 +155,7 @@ class ReactRenderer extends Widget
     {
         $htmlAttributesString = '';
         foreach ($array as $attribute => $value) {
-            $htmlAttributesString .= "{$attribute}='{$value}'";
+            $htmlAttributesString .= "{$attribute} = '{$value}'";
         }
         return $htmlAttributesString;
     }
