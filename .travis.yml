@@ -5,6 +5,7 @@ php:
   - 7.1
 
 before_install:
-  - sudo apt-get install phpbrew
+  - sudo apt-get install libv8-dev g++
+  - /opt/v8
   - sudo apt-get update
   - sudo phpbrew ext install https://github.com/phpv8/v8js php7
