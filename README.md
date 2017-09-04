@@ -25,29 +25,8 @@ ReactRenderer::widget([
     'component' => <componentName>,
     'props' => [props],
     'options' => [options]
-    
-// example
-
-ReactRenderer::widget([
-    'componentsSourceJs' => 'js/layout.js',
-    'component' => 'Layout',
-    'props' => [ 'title' => 'Hello' ],
-    'options' => [
-        'prerender' => true 
-    ]
-]); 
-
-// you also can use namespased components
-
-ReactRenderer::widget([
-    'componentsSourceJs' => 'js/layout.js',
-    'component' => 'Layout.Header',
-    'props' => [ 'title' => 'Hello' ],
-    'options' => [
-        'prerender' => true 
-    ]
-]); 
 ```
+
   - `componentsSourceJs` - path to your react components js file
   - `component` - the name of global variable the contain your React component, you also can use [namespased components](https://facebook.github.io/react/docs/jsx-in-depth.html#namespaced-components) by dot-notation
   - `props` - [props](https://facebook.github.io/react/docs/components-and-props.html) array that'll be passed to your component
@@ -55,9 +34,47 @@ ReactRenderer::widget([
   * `prerender` -  Tells widget to render your component server-side, by default - `true`
   * `tag` - The tag of the element where your component would be passed
   * _html attributes_ -  HTML attribute that will be added to the wrapper element of your component. Example: `'id' => 'root'`.
- 
-### To right working - your reactJs components must be in `window` scope.
+
+### All your reactJs components must be in `window` scope.
+
+# Example
+
+In your view file:
+```php
+ReactRenderer::widget([
+    'componentsSourceJs' => 'js/main.js',
+    'component' => 'Main',
+    'props' => [ 'title' => 'Hello' ],
+]);
+
+```
+Example `main.js`
+
+```js
+class Main extends React.Component {
+    render() {
+        let title = this.props.title;
+        return React.createElement(
+            "main",
+            null,
+            React.createElement("div", null, title)
+        );
+    }
+}
+window.Main = Main;
+```
+Namespased components:
+
+```php
+ReactRenderer::widget([
+      'componentsSourceJs' => 'js/layout.js',
+      'component' => 'Layout.Header',
+      'props' => ['title' => 'Hello'],
+]);
+
+```
 Example `layout.js`
+
 ```js
 class Header extends React.Component {
     render() {
@@ -69,34 +86,15 @@ class Header extends React.Component {
         );
     }
 }
-
-class Main extends React.Component {
-    render() {
-        let title = this.props.title;
-        return React.createElement(
-            "main",
-            null,
-            React.createElement("div", null, title)
-        );
-    }
-}
-
 class Layout extends React.Component {
     render() {
         return React.createElement(
             "div",
             null,
-            React.createElement(Layout.Header, {title: this.props.title}),
-            React.createElement(Layout.Main, {title: this.props.title})
+            React.createElement(Layout.Header, {title: this.props.title})
         );
     }
 }
-
 Layout.Header = Header;
-Layout.Main = Main;
-
-window.Layout = Layout;
 window.Header = Header;
-
 ```
-  
