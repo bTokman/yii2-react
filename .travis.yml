@@ -7,5 +7,6 @@ php:
 
 before_install:
   - sudo apt-get install g++ cpp
+  - sudo apt-get install php-pear
   - sudo apt-get update
   - sudo pecl install v8js
