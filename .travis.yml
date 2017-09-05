@@ -7,4 +7,5 @@ php:
 before_install:
   - sudo apt-get install libv8-dev g++
   - pecl install v8js-0.1.3
+  - /opt/v8
   - phpenv config-add travis.php.ini
