@@ -25,6 +25,7 @@ ReactRenderer::widget([
     'component' => <componentName>,
     'props' => [props],
     'options' => [options]
+])
 ```
 
   - `componentsSourceJs` - path to your react components js file
@@ -41,7 +42,7 @@ ReactRenderer::widget([
 
 In your view file:
 ```php
-ReactRenderer::widget([
+echo ReactRenderer::widget([
     'componentsSourceJs' => 'js/main.js',
     'component' => 'Main',
     'props' => [ 'title' => 'Hello' ],
@@ -66,7 +67,7 @@ window.Main = Main;
 Namespased components:
 
 ```php
-ReactRenderer::widget([
+echo ReactRenderer::widget([
       'componentsSourceJs' => 'js/layout.js',
       'component' => 'Layout.Header',
       'props' => ['title' => 'Hello'],
