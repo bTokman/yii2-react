@@ -5,4 +5,7 @@ php:
   - 7.2
 
 before_install:
-    - composer self-update
+  - sudo apt-get update
+
+install:
+  - travis_retry composer install --no-interaction --prefer-source
