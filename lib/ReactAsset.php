@@ -13,7 +13,7 @@ class ReactAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@npm/react';
+    public $sourcePath = '@npm/react/dist';
 
 
     public $js = YII_ENV_DEV ?

@@ -30,7 +30,6 @@
       "bTokman\\react\\": "lib/"
     }
   },
-  "minimum-stability": "dev",
   "repositories": [
     {
       "type": "composer",

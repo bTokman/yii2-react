@@ -66,7 +66,7 @@ class ReactRenderer extends Widget
      */
     private $_defaultOptions = [
         'tag' => 'div',
-        'prerender' => true
+        'prerender' => false
     ];
 
     /**
@@ -101,13 +101,18 @@ class ReactRenderer extends Widget
     private function getReactSource()
     {
         if ($this->_reactSourceJs === null) {
+            /** Load react js source file */
             $reactBundle = new ReactAsset();
             $reactAlias = Yii::getAlias($reactBundle->sourcePath) . DIRECTORY_SEPARATOR;
             $this->_reactSourceJs .= file_get_contents($reactAlias . $reactBundle->js[0]);
 
+            /** Load react-dom and react-dom-server files */
             $reactDom = new ReactDomAsset();
             $domAlias = Yii::getAlias($reactDom->sourcePath) . DIRECTORY_SEPARATOR;
-            $this->_reactSourceJs .= file_get_contents($domAlias . $reactDom->js[0]);
+
+            foreach ($reactDom->js as $sourceFile) {
+                $this->_reactSourceJs .= file_get_contents($domAlias . $sourceFile);
+            }
         }
 
         return $this->_reactSourceJs;
@@ -122,7 +127,6 @@ class ReactRenderer extends Widget
         ReactDomAsset::register($this->view);
         $this->getView()->registerJsFile($this->componentsSourceJs, ['depends' => 'bTokman\react\ReactAsset']);
         ReactUiAsset::register($this->view);
-
     }
 
     /**
