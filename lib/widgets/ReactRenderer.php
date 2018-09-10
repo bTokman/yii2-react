@@ -1,8 +1,6 @@
 <?php
 
-
 namespace bTokman\react\widgets;
-
 
 use ReactJS;
 use Yii;
@@ -20,30 +18,29 @@ use bTokman\react\ReactUiAsset;
  */
 class ReactRenderer extends Widget
 {
+    /**
+     * Path to your React components js file
+     * @var string
+     */
+    public $componentsSourceJs;
 
+    /**
+     * Component name
+     * @var string
+     */
+    public $component;
 
-    public
-        /**
-         * Path to your React components js file
-         * @var string
-         */
-        $componentsSourceJs,
-        /**
-         * Component name
-         * @var string
-         */
-        $component,
-        /**
-         * React component props
-         * @var array
-         */
-        $props,
-        /**
-         * Options for html attributes
-         * @var array
-         */
-        $options = [];
+    /**
+     * React component props
+     * @var array
+     */
+    public $props;
 
+    /**
+     * Options for html attributes
+     * @var array
+     */
+    public $options = [];
 
     /**
      * Instance of ReactJS object
@@ -69,7 +66,6 @@ class ReactRenderer extends Widget
         'tag' => 'div',
         'prerender' => true
     ];
-
 
     /**
      * Initializes the widget.
@@ -168,6 +164,5 @@ class ReactRenderer extends Widget
     {
         return file_get_contents($this->componentsSourceJs);
     }
-
 
 }

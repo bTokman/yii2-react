@@ -15,7 +15,9 @@
   "require": {
     "php": ">=5.4.0",
     "yiisoft/yii2": "~2",
-    "reactjs/react-php-v8js": "^2.0"
+    "reactjs/react-php-v8js": "^2.0",
+    "npm-asset/react": "16.5.0",
+    "npm-asset/react-dom": "16.5.0"
   },
   "authors": [
     {
@@ -28,5 +30,17 @@
       "bTokman\\react\\": "lib/"
     }
   },
-  "minimum-stability": "dev"
+
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "extra": {
+    "asset-installer-paths": {
+      "npm-asset-library": "vendor/npm"
+    }
+  }
 }
