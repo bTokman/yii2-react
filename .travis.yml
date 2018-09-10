@@ -7,14 +7,15 @@ php:
   - 7.2
 
 before_install:
-  - sudo add-apt-repository -y ppa:pinepain/libv8
-  - sudo apt-get update -q
-  - sudo apt-get install libv8-6.1 libv8-6.1-dev
+  - apt-get install -y libv8-6.1 libv8-6.1-dev
+  - cd /tmp
   - git clone https://github.com/phpv8/v8js.git
   - cd v8js
   - phpize
   - ./configure --with-v8js=/opt/libv8-6.1
   - make
+  - make test
+  - make install
   - phpenv config-add travis.php.ini
   - travis_retry composer self-update
 
