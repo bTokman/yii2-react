@@ -2,6 +2,7 @@
 
 namespace bTokman\react\widgets;
 
+use bTokman\react\ReactDomAsset;
 use ReactJS;
 use Yii;
 use yii\base\Widget;
@@ -100,13 +101,15 @@ class ReactRenderer extends Widget
     private function getReactSource()
     {
         if ($this->_reactSourceJs === null) {
-            $bundle = new ReactAsset();
-            $alias = Yii::getAlias($bundle->sourcePath) . DIRECTORY_SEPARATOR;
+            $reactBundle = new ReactAsset();
+            $reactAlias = Yii::getAlias($reactBundle->sourcePath) . DIRECTORY_SEPARATOR;
+            $this->_reactSourceJs .= file_get_contents($reactAlias . $reactBundle->js[0]);
 
-            foreach ($bundle->js as $jsFile) {
-                $this->_reactSourceJs .= file_get_contents($alias . $bundle->js[0]);
-            }
+            $reactDom = new ReactDomAsset();
+            $domAlias = Yii::getAlias($reactDom->sourcePath) . DIRECTORY_SEPARATOR;
+            $this->_reactSourceJs .= file_get_contents($domAlias . $reactDom->js[0]);
         }
+
         return $this->_reactSourceJs;
     }
 
@@ -116,6 +119,7 @@ class ReactRenderer extends Widget
     public function applyJs()
     {
         ReactAsset::register($this->view);
+        ReactDomAsset::register($this->view);
         $this->getView()->registerJsFile($this->componentsSourceJs, ['depends' => 'bTokman\react\ReactAsset']);
         ReactUiAsset::register($this->view);
 

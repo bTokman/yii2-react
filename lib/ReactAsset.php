@@ -13,15 +13,15 @@ class ReactAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@npm/react/cjs';
+    public $sourcePath = '@npm/react';
 
 
     public $js = YII_ENV_DEV ?
         [
-            'react.development.js',
+            'react.js',
         ] :
         [
-            'react.production.min.js',
+            'react.min.js',
         ];
 }
 

@@ -16,8 +16,8 @@
     "php": ">=5.4.0",
     "yiisoft/yii2": "~2",
     "reactjs/react-php-v8js": "^2.0",
-    "npm-asset/react": "16.5.0",
-    "npm-asset/react-dom": "16.5.0"
+    "npm-asset/react": "^0.14.6",
+    "npm-asset/react-dom": "^0.14.6"
   },
   "authors": [
     {
