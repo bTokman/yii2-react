@@ -48,6 +48,7 @@ class ReactRenderer extends Widget
      * @var $_react ReactJS
      */
     private $_react;
+
     /**
      * Path to React bundle, must contain:
      * React Js : https://www.npmjs.com/package/react
@@ -101,7 +102,10 @@ class ReactRenderer extends Widget
         if ($this->_reactSourceJs === null) {
             $bundle = new ReactAsset();
             $alias = Yii::getAlias($bundle->sourcePath) . DIRECTORY_SEPARATOR;
-            $this->_reactSourceJs = file_get_contents($alias . $bundle->js[0]);
+
+            foreach ($bundle->js as $jsFile) {
+                $this->_reactSourceJs .= file_get_contents($alias . $bundle->js[0]);
+            }
         }
         return $this->_reactSourceJs;
     }
