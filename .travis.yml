@@ -6,7 +6,16 @@ php:
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install libv8-dev g++
+  - sudo apt-get install build-essential curl git python libglib2.0-dev
+  - cd /tmp
+  - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+  - export PATH=`pwd`/depot_tools:"$PATH"
+  - fetch v8
+  - cd v8
+  - tools/dev/v8gen.py -vv x64.release -- is_component_build=true
+  - sudo mkdir -p /opt/v8/{lib,include}
+  - sudo cp out.gn/x64.release/lib*.so out.gn/x64.release/*_blob.bin \ out.gn/x64.release/icudtl.dat /opt/v8/lib/
+  - sudo cp -R include/* /opt/v8/include/
   - git clone https://github.com/phpv8/v8js.git
   - cd v8js
   - git checkout 1.3.6
