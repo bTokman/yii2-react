@@ -1,38 +1,8 @@
-language: php
-
 sudo: required
-
-php:
-  - 7.1
-  - 7.2
-
+dist: trusty
+env:
+  - V8VER=5.2
 before_install:
-  - sudo apt-get install build-essential
-  - sudo apt-get install libicu-dev
-  - cd /tmp
-  - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-  - export PATH=`pwd`/depot_tools:"$PATH"
-  - fetch v8
-  - cd v8
-  - git checkout 5.1.99
-  - gclient sync
-  - export GYP_DEFINES="use_system_icu=1"
-  - export GYPFLAGS="-Dv8_use_external_startup_data=0"
-  - export GYPFLAGS="${GYPFLAGS} -Dlinux_use_bundled_gold=0"
-  - make native library=shared snapshot=on -j8
-  - sudo mkdir -p /usr/lib /usr/include
-  - sudo cp out/native/lib.target/lib*.so /usr/lib/
-  - sudo cp -R include/* /usr/include
-  - cd /tmp
-  - git clone https://github.com/phpv8/v8js.git
-  - cd v8js
-  - phpize
-  - ./configure
-  - make
-  - make test
-  - make install
-  - phpenv config-add travis.php.ini
-  - travis_retry composer self-update
-
+  - make -f Makefile.travis before_install
 install:
-  - travis_retry composer install --no-interaction --prefer-source
+  - make -f Makefile.travis install
