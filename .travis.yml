@@ -4,6 +4,6 @@ env:
   - V8VER=5.2
 
 before_install:
-    - sudo apt-get install libv8-dev libv8-dbg g++ cpp
+    - printf "\n" | sudo apt-get install libv8-dev g++
     - sudo apt-get update
     - sudo pecl install v8js-0.2.0
