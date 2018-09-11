@@ -4,11 +4,11 @@ env:
   - V8VER=5.2
 
 before_install:
-    sudo add-apt-repository ppa:pinepain/libv8-5.1 -y
-    sudo apt-get update -q
+    - sudo add-apt-repository ppa:pinepain/libv8-5.1 -y
+    - sudo apt-get update -q
 
 install:
-    sudo apt-get install -y libv8-$(V8VER)-dev
-    git clone https://github.com/phpv8/v8js.git
-    cd v8js && phpize && ./configure CXXFLAGS="-Wall -Wno-write-strings -Werror" && $(MAKE) -j3 && $(MAKE) install install && cd ..
-    echo "extension=v8js.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||
+    - sudo apt-get install -y libv8-$(V8VER)-dev
+    - git clone https://github.com/phpv8/v8js.git
+    - cd v8js && phpize && ./configure CXXFLAGS="-Wall -Wno-write-strings -Werror" && $(MAKE) -j3 && $(MAKE) install install && cd ..
+    - echo "extension=v8js.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||
