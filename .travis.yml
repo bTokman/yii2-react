@@ -4,7 +4,7 @@ env:
   - V8VER=5.2
 
 before_install:
-    - sudo add-apt-repository ppa:pinepain/libv8-5.1 -y
+    - sudo add-apt-repository ppa:pinepain/libv8-$(V8VER) -y
     - sudo apt-get update -q
 
 install:
