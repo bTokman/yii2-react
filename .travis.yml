@@ -4,11 +4,17 @@ env:
   - V8VER=5.2
 
 before_install:
-    - sudo add-apt-repository ppa:pinepain/libv8-$(V8VER) -y
+    - sudo add-apt-repository -y ppa:pinepain/libv8-5.4 -y
     - sudo apt-get update -q
-
-install:
-    - sudo apt-get install -y libv8-$(V8VER)-dev
+    - sudo apt-get install -y libv8-5.4
+    - cd /tmp
     - git clone https://github.com/phpv8/v8js.git
-    - cd v8js && phpize && ./configure CXXFLAGS="-Wall -Wno-write-strings -Werror" && $(MAKE) -j3 && $(MAKE) install install && cd ..
-    - echo "extension=v8js.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||
+    - cd v8js
+    - phpize
+    - ./configure --with-v8js=/opt/v8 LDFLAGS="-lstdc++"
+    - make
+    - make test
+    - sudo make install
+    - sudo bash -c "sudo echo "extension=v8js.so" > /etc/php/7.1/mods-available/v8js.ini"
+    - sudo ln -s /etc/php/7.1/mods-available/v8js.ini /etc/php/7.1/fpm/conf.d/20-v8js.ini
+    - sudo ln -s /etc/php/7.1/mods-available/v8js.ini /etc/php/7.1/cli/conf.d/20-v8js.ini
