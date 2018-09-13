@@ -9,6 +9,27 @@ php:
   - 7.2
 
 before_install:
-    - printf "\n" | sudo apt-get install libv8-dev g++
-    - sudo apt-get update
-    - printf "\n" | pecl install v8js-0.2.0
+  - apt-get update && \
+  - apt-get upgrade -y && \
+  - apt-get install -y vim git git-svn subversion make g++ libreadline-dev && \
+  - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/local/depot_tools && \
+  - export PATH=/usr/local/depot_tools:$PATH && \
+  - cd /tmp && \
+  - fetch v8 && \
+  - cd v8 && \
+  - git checkout 4.9.385.28 && \
+  - gclient sync && \
+  - export GYP_DEFINES="use_system_icu=1" && \
+  - export GYPFLAGS="-Dv8_use_external_startup_data=0" && \
+  - make native library=shared snapshot=on -j4 && \
+  - cp out/native/lib.target/lib*.so /usr/lib/ && \
+  - cp out/native/obj.target/tools/gyp/libv8_libplatform.a /usr/lib && \
+  - cp -R include/* /usr/include && \
+  - git clone https://github.com/phpv8/v8js.git --branch 1.1.0 /tmp/v8js && \
+  - cd /tmp/v8js && phpize && ./configure && \
+  - make all test install && \
+  - cd / && \
+  - rm -rf /tmp /usr/local/depot_tools && \
+  - apt-get purge -y vim git git-svn subversion make g++ libreadline-dev && \
+  - apt-get autoremove -y && \
+  - apt-get clean all
