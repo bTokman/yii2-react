@@ -1,7 +1,12 @@
 sudo: required
 dist: trusty
-env:
-  - V8VER=5.2
+
+language: php
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
 
 before_install:
     - printf "\n" | sudo apt-get install libv8-dev g++
