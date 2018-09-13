@@ -11,4 +11,4 @@ php:
 before_install:
     - printf "\n" | sudo apt-get install libv8-dev g++
     - sudo apt-get update
-    - sudo pecl install v8js-0.2.0
+    - printf "\n" | pecl install v8js-0.2.0
