@@ -9,9 +9,9 @@ php:
   - 7.2
 
 before_install:
-  - apt-get update && \
-  - apt-get upgrade -y && \
-  - apt-get install -y vim git git-svn subversion make g++ libreadline-dev && \
+  - sudo apt-get update && \
+  - sudo apt-get upgrade -y && \
+  - sudo apt-get install -y vim git git-svn subversion make g++ libreadline-dev && \
   - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/local/depot_tools && \
   - export PATH=/usr/local/depot_tools:$PATH && \
   - cd /tmp && \
@@ -29,7 +29,7 @@ before_install:
   - cd /tmp/v8js && phpize && ./configure && \
   - make all test install && \
   - cd / && \
-  - rm -rf /tmp /usr/local/depot_tools && \
-  - apt-get purge -y vim git git-svn subversion make g++ libreadline-dev && \
-  - apt-get autoremove -y && \
-  - apt-get clean all
+  - sudo rm -rf /tmp /usr/local/depot_tools && \
+  - sudo apt-get purge -y vim git git-svn subversion make g++ libreadline-dev && \
+  - sudo apt-get autoremove -y && \
+  - sudo apt-get clean all
