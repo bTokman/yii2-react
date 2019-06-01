@@ -9,27 +9,11 @@ php:
   - 7.2
 
 before_install:
-  - sudo apt-get update && \
-  - sudo apt-get upgrade -y && \
-  - sudo apt-get install -y vim git git-svn subversion make g++ libreadline-dev && \
-  - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git /usr/local/depot_tools && \
-  - export PATH=/usr/local/depot_tools:$PATH && \
-  - cd /tmp && \
-  - fetch v8 && \
-  - cd v8 && \
-  - git checkout 4.9.385.28 && \
-  - gclient sync && \
-  - export GYP_DEFINES="use_system_icu=1" && \
-  - export GYPFLAGS="-Dv8_use_external_startup_data=0" && \
-  - make native library=shared snapshot=on -j4 && \
-  - cp out/native/lib.target/lib*.so /usr/lib/ && \
-  - cp out/native/obj.target/tools/gyp/libv8_libplatform.a /usr/lib && \
-  - cp -R include/* /usr/include && \
-  - git clone https://github.com/phpv8/v8js.git --branch 1.1.0 /tmp/v8js && \
-  - cd /tmp/v8js && phpize && ./configure && \
-  - make all test install && \
-  - cd / && \
-  - sudo rm -rf /tmp /usr/local/depot_tools && \
-  - sudo apt-get purge -y vim git git-svn subversion make g++ libreadline-dev && \
-  - sudo apt-get autoremove -y && \
-  - sudo apt-get clean all
+  - cd /tmp \
+  - git clone https://github.com/phpv8/v8js.git \
+  - cd v8js \
+  - phpize \
+  - ./configure --with-v8js=/opt/v8 LDFLAGS="-lstdc++" \
+  - make \
+  - make test \
+  - sudo make install
