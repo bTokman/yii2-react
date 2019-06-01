@@ -10,7 +10,7 @@ php:
 
 before_install:
   - cd /tmp \
-  - git clone https://github.com/phpv8/v8js.git \
+  - git clone https://github.com/phpv8/v8js.git v8js \
   - cd v8js \
   - phpize \
   - ./configure --with-v8js=/opt/v8 LDFLAGS="-lstdc++" \
