@@ -23,6 +23,7 @@ class ReactRenderer extends Widget
 
 
     public
+        $js,
         /**
          * Path to your React components js file
          * @var string
@@ -76,8 +77,8 @@ class ReactRenderer extends Widget
      */
     public function init()
     {
-        if (empty($this->componentsSourceJs) || !file_exists($this->componentsSourceJs)) {
-            throw new NotFoundHttpException('React component source js file doesn\'t exist');
+        if (!$this->js and (empty($this->componentsSourceJs) || !file_exists($this->componentsSourceJs )) ) {
+            throw new NotFoundHttpException('React component source js file doesn\'t exist, and raw js is empty');
         }
         /**
          * Get ReactJs server side render instance
@@ -164,7 +165,7 @@ class ReactRenderer extends Widget
      * Get source component js for ReactJs constructor
      * @return string
      */
-    private function getSourceJs()
+    protected function getSourceJs()
     {
         return file_get_contents($this->componentsSourceJs);
     }
