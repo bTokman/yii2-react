@@ -15,7 +15,8 @@
   "require": {
     "php": ">=5.4.0",
     "yiisoft/yii2": "~2",
-    "reactjs/react-php-v8js": "^2.0"
+    "reactjs/react-php-v8js": "^2.0",
+    "talyssonoc/php-babel-transpiler":"master"
   },
   "authors": [
     {

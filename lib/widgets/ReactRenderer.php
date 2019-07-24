@@ -10,7 +10,7 @@ use yii\base\Widget;
 use yii\web\NotFoundHttpException;
 use bTokman\react\ReactAsset;
 use bTokman\react\ReactUiAsset;
-
+use Babel\Transpiler;
 
 /**
  * Class ReactRenderer - yii2 widget to server-side react rendering
@@ -117,9 +117,8 @@ class ReactRenderer extends Widget
     public function applyJs()
     {
         ReactAsset::register($this->view);
-        $this->getView()->registerJsFile($this->componentsSourceJs, ['depends' => 'bTokman\react\ReactAsset']);
+        $this->getView()->registerJs($this->getSourceJs(), yii\web\View::POS_END);
         ReactUiAsset::register($this->view);
-
     }
 
     /**
@@ -136,7 +135,6 @@ class ReactRenderer extends Widget
         if ($options['prerender'] === true) {
             $markup = $this->_react->setComponent($this->component, $this->props)->getMarkup();
         }
-
         // Pass props back to view as value of `data-react-props`
         $props = htmlentities(json_encode($this->props), ENT_QUOTES);
 
@@ -167,7 +165,10 @@ class ReactRenderer extends Widget
      */
     protected function getSourceJs()
     {
-        return file_get_contents($this->componentsSourceJs);
+	if (!$this->js) {
+	    $this->js = Transpiler::transform(file_get_contents($this->componentsSourceJs));
+	}
+        return $this->js;;
     }
 
 

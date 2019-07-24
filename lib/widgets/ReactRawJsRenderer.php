@@ -3,6 +3,10 @@
 
 namespace bTokman\react\widgets;
 
+use yii\web\View;
+use bTokman\react\ReactAsset;
+use bTokman\react\ReactUiAsset;
+
 
 /**
  * Class ReactRenderer - yii2 widget to server-side react rendering
@@ -20,6 +24,18 @@ class ReactRawJsRenderer extends ReactRenderer
          * @var string
          */
         $js;
+
+    /**
+     * Apply js in view
+     */
+    public function applyJs()
+    {
+        ReactAsset::register($this->view);
+	$this->getView()->registerJs($this->js,View::POS_END);
+        ReactUiAsset::register($this->view);
+    }
+
+
 
     /**
      * Get source component js for ReactJs constructor
