@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use bTokman\react\ReactAsset;
 use bTokman\react\ReactUiAsset;
 use Babel\Transpiler;
+use \V8JsException;
 
 /**
  * Class ReactRenderer - yii2 widget to server-side react rendering
@@ -43,7 +44,12 @@ class ReactRenderer extends Widget
          * Options for html attributes
          * @var array
          */
-        $options = [];
+        $options = [],
+        /**
+         *Transpile js, using Babel Transpiler or no
+         */
+        $useTranspiler = true; 
+        
 
 
     /**
@@ -112,7 +118,7 @@ class ReactRenderer extends Widget
         if ($this->_reactSourceJs === null) {
             $bundle = new ReactAsset();
             $alias = Yii::getAlias($bundle->sourcePath) . DIRECTORY_SEPARATOR;
-            $this->_reactSourceJs = file_get_contents($alias . $bundle->js[0]);
+            $this->_reactSourceJs = file_get_contents($alias . $bundle->js['react']);
         }
         return $this->_reactSourceJs;
     }
@@ -172,7 +178,11 @@ class ReactRenderer extends Widget
     protected function getSourceJs()
     {
 	if (!$this->js) {
-	    $this->js = Transpiler::transform(file_get_contents($this->componentsSourceJs));
+	    if ($this->useTranspiler) {
+		$this->js = Transpiler::transform(file_get_contents($this->componentsSourceJs));
+	    } else {
+		$this->js = file_get_contents($this->componentsSourceJs);
+	    }
 	}
         return $this->js;;
     }
