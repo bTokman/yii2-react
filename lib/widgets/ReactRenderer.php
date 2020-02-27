@@ -85,6 +85,12 @@ class ReactRenderer extends Widget
          */
         $this->_react = new ReactJS($this->getReactSource(), $this->getSourceJs());
 
+        /**
+         * Need to set error handler for reactJS, because if there is no handler, it somewhy,
+         * dont throw exception, but echoes error and die.
+         */
+        $this->_react->setErrorHandler( function( V8JsException $e){ throw $e; } );
+
         parent::init();
     }
 
