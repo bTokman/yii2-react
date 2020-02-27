@@ -10,7 +10,8 @@ use yii\base\Widget;
 use yii\web\NotFoundHttpException;
 use bTokman\react\ReactAsset;
 use bTokman\react\ReactUiAsset;
-
+use Babel\Transpiler;
+use \V8JsException;
 
 /**
  * Class ReactRenderer - yii2 widget to server-side react rendering
@@ -23,6 +24,7 @@ class ReactRenderer extends Widget
 
 
     public
+        $js,
         /**
          * Path to your React components js file
          * @var string
@@ -42,7 +44,12 @@ class ReactRenderer extends Widget
          * Options for html attributes
          * @var array
          */
-        $options = [];
+        $options = [],
+        /**
+         *Transpile js, using Babel Transpiler or no
+         */
+        $useTranspiler = true; 
+        
 
 
     /**
@@ -76,13 +83,19 @@ class ReactRenderer extends Widget
      */
     public function init()
     {
-        if (empty($this->componentsSourceJs) || !file_exists($this->componentsSourceJs)) {
-            throw new NotFoundHttpException('React component source js file doesn\'t exist');
+        if (!$this->js and (empty($this->componentsSourceJs) || !file_exists($this->componentsSourceJs )) ) {
+            throw new NotFoundHttpException('React component source js file doesn\'t exist, and raw js is empty');
         }
         /**
          * Get ReactJs server side render instance
          */
         $this->_react = new ReactJS($this->getReactSource(), $this->getSourceJs());
+
+        /**
+         * Need to set error handler for reactJS, because if there is no handler, it somewhy,
+         * dont throw exception, but echoes error and die.
+         */
+        $this->_react->setErrorHandler( function( V8JsException $e){ throw $e; } );
 
         parent::init();
     }
@@ -105,7 +118,7 @@ class ReactRenderer extends Widget
         if ($this->_reactSourceJs === null) {
             $bundle = new ReactAsset();
             $alias = Yii::getAlias($bundle->sourcePath) . DIRECTORY_SEPARATOR;
-            $this->_reactSourceJs = file_get_contents($alias . $bundle->js[0]);
+            $this->_reactSourceJs = file_get_contents($alias . $bundle->js['react']);
         }
         return $this->_reactSourceJs;
     }
@@ -116,9 +129,8 @@ class ReactRenderer extends Widget
     public function applyJs()
     {
         ReactAsset::register($this->view);
-        $this->getView()->registerJsFile($this->componentsSourceJs, ['depends' => 'bTokman\react\ReactAsset']);
+        $this->getView()->registerJs($this->getSourceJs(), yii\web\View::POS_END);
         ReactUiAsset::register($this->view);
-
     }
 
     /**
@@ -135,7 +147,6 @@ class ReactRenderer extends Widget
         if ($options['prerender'] === true) {
             $markup = $this->_react->setComponent($this->component, $this->props)->getMarkup();
         }
-
         // Pass props back to view as value of `data-react-props`
         $props = htmlentities(json_encode($this->props), ENT_QUOTES);
 
@@ -164,9 +175,16 @@ class ReactRenderer extends Widget
      * Get source component js for ReactJs constructor
      * @return string
      */
-    private function getSourceJs()
+    protected function getSourceJs()
     {
-        return file_get_contents($this->componentsSourceJs);
+	if (!$this->js) {
+	    if ($this->useTranspiler) {
+		$this->js = Transpiler::transform(file_get_contents($this->componentsSourceJs));
+	    } else {
+		$this->js = file_get_contents($this->componentsSourceJs);
+	    }
+	}
+        return $this->js;;
     }
 
 

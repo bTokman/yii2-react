@@ -15,7 +15,25 @@
   "require": {
     "php": ">=5.4.0",
     "yiisoft/yii2": "~2",
-    "reactjs/react-php-v8js": "^2.0"
+    "reactjs/react-php-v8js": "^2.0",
+    "talyssonoc/php-babel-transpiler":"master",
+    "koala-framework/composer-extra-assets": "~1.1"
+  },
+  "extra": {
+    "require-npm": {
+      "react": "*",
+      "react-dom":"*",
+      "browserify": "^16",
+      "uglify-js":"*"
+    }
+  },
+  "scripts": {
+    "regenerate_react_bundle": [
+      "node_modules/.bin/browserify build-react-bundle.js > lib/assets/react-bundle.js",
+      "node_modules/.bin/uglifyjs  lib/assets/react-bundle.js -c -m -o lib/assets/react-bundle.min.js"
+    ],
+    "post-install-cmd": "@regenerate_react_bundle",
+    "post-update-cmd": "@regenerate_react_bundle"
   },
   "authors": [
     {
