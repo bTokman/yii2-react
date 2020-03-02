@@ -24,13 +24,15 @@
       "react": "*",
       "react-dom":"*",
       "browserify": "^16",
-      "uglify-js":"*"
+      "envify": "*",
+      "terser": "*",
+      "uglifyify": "*"
     }
   },
   "scripts": {
     "regenerate_react_bundle": [
       "node_modules/.bin/browserify build-react-bundle.js > lib/assets/react-bundle.js",
-      "node_modules/.bin/uglifyjs  lib/assets/react-bundle.js -c -m -o lib/assets/react-bundle.min.js"
+      "node_modules/.bin/browserify build-react-bundle.js -g [ envify --NODE_ENV production ] -g uglifyify | terser --compress --mangle > lib/assets/react-bundle.min.js"
     ],
     "post-install-cmd": "@regenerate_react_bundle",
     "post-update-cmd": "@regenerate_react_bundle"
