@@ -23,16 +23,15 @@
     "require-npm": {
       "react": "*",
       "react-dom":"*",
-      "browserify": "^16",
       "envify": "*",
       "terser": "*",
+      "browserify": "^16",
       "uglifyify": "*"
     }
   },
   "scripts": {
     "regenerate_react_bundle": [
-      "node_modules/.bin/browserify build-react-bundle.js > lib/assets/react-bundle.js",
-      "node_modules/.bin/browserify build-react-bundle.js -g [ envify --NODE_ENV production ] -g uglifyify | terser --compress --mangle > lib/assets/react-bundle.min.js"
+      "./build-bundles.sh"
     ],
     "post-install-cmd": "@regenerate_react_bundle",
     "post-update-cmd": "@regenerate_react_bundle"
