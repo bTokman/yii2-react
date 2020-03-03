@@ -17,8 +17,7 @@ Set the `minimum-stability` in your composer.json to `dev`
 ... 
 "scripts": {
 "regenerate_react_bundle": [
-    "vendor/b-tokman/yii2-react/node_modules/.bin/browserify vendor/b-tokman/yii2-react/build-react-bundle.js > vendor/b-tokman/yii2-react/lib/assets/react-bundle.js",
-    "vendor/b-tokman/yii2-react/node_modules/.bin/uglifyjs  vendor/b-tokman/yii2-react/lib/assets/react-bundle.js -c -m -o vendor/b-tokman/yii2-react/lib/assets/react-bundle.min.js"
+    "vendor/b-tokman/yii2-react/build-bundles.sh"
 ],
 "post-install-cmd":[
     "@regenerate_react_bundle",
