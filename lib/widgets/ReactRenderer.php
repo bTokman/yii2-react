@@ -184,7 +184,7 @@ class ReactRenderer extends Widget
 		$this->js = file_get_contents($this->componentsSourceJs);
 	    }
 	}
-        return $this->js;;
+        return $this->js;
     }
 
 
